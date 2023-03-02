@@ -16,6 +16,15 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">
+
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session('success') }}!</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         <div class="card-header">
                             All Categories
                         </div>
@@ -26,23 +35,29 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Username</th>
-                                    <th scope="col">Email</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">User</th>
                                     <th scope="col">Created At</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($users as $i => $user)
-                    
-                <tr>
-                    <th scope="row">{{ ++$i }}</th>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->created_at->diffForHumans() }}</td>
-                </tr>
-                @endforeach --}}
+                                @foreach ($categories as $category)
+                                    <tr>
+                                        <th scope="row">{{ $categories->firstItem()+$loop->index }}</th>
+                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $category->user_id }}</td>
+                                        <td>
+                                            @if ($category->created_at == null)
+                                                <span class="text-danger">Date was not set...!!</span>
+                                            @else
+                                                {{ $category->created_at->diffForHumans() }}
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                        {{ $categories->links() }}
                     </div>
                 </div>
 
@@ -56,8 +71,9 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Category Name</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name">
-                                    
+                                    <input type="text" name="name"
+                                        class="form-control @error('name') is-invalid @enderror" id="name">
+
                                     @error('name')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
