@@ -6,7 +6,7 @@
 
 
             <b class="float-right">
-                {{-- <span class="badge badge-success">{{ $users->count() }}</span>Users --}}
+                <span class="badge badge-success">{{ $categories->count() }}</span>Categories
             </b>
         </h2>
     </x-slot>
@@ -38,6 +38,7 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">User</th>
                                     <th scope="col">Created At</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,13 +46,17 @@
                                     <tr>
                                         <th scope="row">{{ $categories->firstItem()+$loop->index }}</th>
                                         <td>{{ $category->name }}</td>
-                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $category->user->name }}</td>
                                         <td>
                                             @if ($category->created_at == null)
                                                 <span class="text-danger">Date was not set...!!</span>
                                             @else
                                                 {{ Carbon\Carbon::parse($category->created_at)->diffForHumans() }}
                                             @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ url('categories/edit/'.$category->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                            <a href="{{ url('categories/softdelete/'.$category->id) }}" class="btn btn-sm btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -82,6 +87,60 @@
                             </form>
                         </div>
                     </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+
+                        <div class="card-header">
+                            Trashed Categories
+                        </div>
+
+
+
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">User</th>
+                                    <th scope="col">Created At</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($trash as $category)
+                                    <tr>
+                                        <th scope="row">{{ $trash->firstItem()+$loop->index }}</th>
+                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $category->user->name }}</td>
+                                        <td>
+                                            @if ($category->created_at == null)
+                                                <span class="text-danger">Date was not set...!!</span>
+                                            @else
+                                                {{ Carbon\Carbon::parse($category->created_at)->diffForHumans() }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ url('categories/restore/'.$category->id) }}" class="btn btn-sm btn-info">Restore</a>
+                                            <a href="{{ url('categories/delete/'.$category->id) }}" class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{ $trash->links() }}
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+
                 </div>
             </div>
 
