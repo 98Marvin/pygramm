@@ -22,8 +22,8 @@
             <ul class="nav navbar-nav">
                 <!-- Github Link Button -->
                 <li class="github-link mr-3">
-                    <a class="btn btn-outline-secondary btn-sm"
-                        href="https://github.com/tafcoder/sleek-dashboard" target="_blank">
+                    <a class="btn btn-outline-secondary btn-sm" href="https://github.com/tafcoder/sleek-dashboard"
+                        target="_blank">
                         <span class="d-none d-md-inline-block mr-2">Source Code</span>
                         <i class="mdi mdi-github-circle"></i>
                     </a>
@@ -84,11 +84,9 @@
                     <ul class="dropdown-menu dropdown-menu-right">
                         <!-- User image -->
                         <li class="dropdown-header">
-                            <img src="/back/assets/img/user/user.png" class="img-circle"
-                                alt="User Image" />
+                            <img src="/back/assets/img/user/user.png" class="img-circle" alt="User Image" />
                             <div class="d-inline-block">
-                                {{ auth()->user()->name }} <small
-                                    class="pt-1">{{ auth()->user()->email }}</small>
+                                {{ auth()->user()->name }} <small class="pt-1">{{ auth()->user()->email }}</small>
                             </div>
                         </li>
 
@@ -110,7 +108,13 @@
                         </li>
 
                         <li class="dropdown-footer">
-                            <a href="signin.html"> <i class="mdi mdi-logout"></i> Log Out </a>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                                <i class="mdi mdi-logout"></i> Log Out </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </li>
                     </ul>
                 </li>
