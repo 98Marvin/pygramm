@@ -32,6 +32,7 @@ Route::get('/brands', [BrandController::class, 'index'])->name('brands');
 Route::post('/brands', [BrandController::class, 'store'])->name('brand.store');
 Route::get('/brands/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
 Route::patch('/brands/update/{id}', [BrandController::class, 'update'])->name('brand.update');
+Route::get('/brands/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
  
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {

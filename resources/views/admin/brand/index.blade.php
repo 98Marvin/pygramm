@@ -44,11 +44,12 @@
                             <tbody>
                                 @foreach ($brands as $brand)
                                     <tr>
-                                        <th scope="row">{{ $brands->firstItem()+$loop->index }}</th>
+                                        <th scope="row">{{ $brands->firstItem() + $loop->index }}</th>
                                         <td>{{ $brand->brand_name }}</td>
                                         <td>
-                                            <img src="/{{ $brand->image }}" style="height: 40px; border-radius:10px; width: 40px;" alt="">
-                                            
+                                            <img src="/{{ $brand->image }}"
+                                                style="height: 40px; border-radius:10px; width: 40px;" alt="">
+
                                         </td>
                                         <td>
                                             @if ($brand->created_at == null)
@@ -58,8 +59,11 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ url('brands/edit/'.$brand->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                            <a href="{{ url('brands/delete/'.$brand->id) }}" class="btn btn-sm btn-danger">Delete</a>
+                                            <a href="{{ url('brands/edit/' . $brand->id) }}"
+                                                class="btn btn-sm btn-warning">Edit</a>
+                                            <a href="{{ url('brands/delete/' . $brand->id) }}"
+                                                onclick="return confirm('Are you sure you want to delete brand...?')"
+                                                class="btn btn-sm btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -89,7 +93,8 @@
 
                                 <div class="form-group">
                                     <label for="image">Brand Image</label>
-                                    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
+                                    <input type="file" name="image"
+                                        class="form-control @error('image') is-invalid @enderror">
 
                                     @error('image')
                                         <span class="invalid-feedback">{{ $message }}</span>
