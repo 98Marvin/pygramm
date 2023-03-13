@@ -29,7 +29,10 @@ Route::get('/categories/restore/{id}', [CategoryController::class, 'restore'])->
 Route::get('/categories/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
 
 Route::get('/brands', [BrandController::class, 'index'])->name('brands');
-
+Route::post('/brands', [BrandController::class, 'store'])->name('brand.store');
+Route::get('/brands/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
+Route::patch('/brands/update/{id}', [BrandController::class, 'update'])->name('brand.update');
+ 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         $users = User::all();

@@ -29,7 +29,7 @@ class CategoryController extends Controller
             [
                 'name.required' => 'Please enter Category Name',
                 'name.max' => 'Category Name is more than 255 characters',
-            ],
+            ]
         );
 
         Category::insert([

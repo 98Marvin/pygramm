@@ -47,8 +47,8 @@
                                         <th scope="row">{{ $brands->firstItem()+$loop->index }}</th>
                                         <td>{{ $brand->brand_name }}</td>
                                         <td>
-                                            <img src="/" alt="">
-                                            {{ $brand->image }}
+                                            <img src="/{{ $brand->image }}" style="height: 40px; border-radius:10px; width: 40px;" alt="">
+                                            
                                         </td>
                                         <td>
                                             @if ($brand->created_at == null)
@@ -58,8 +58,8 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ url('brand/edit/'.$brand->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                            <a href="{{ url('brand/delete/'.$brand->id) }}" class="btn btn-sm btn-danger">Delete</a>
+                                            <a href="{{ url('brands/edit/'.$brand->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                            <a href="{{ url('brands/delete/'.$brand->id) }}" class="btn btn-sm btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -75,7 +75,7 @@
                             Add Brand
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('category.store') }}" method="post">
+                            <form action="{{ route('brand.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="brand_name">Brand Name</label>
@@ -89,7 +89,7 @@
 
                                 <div class="form-group">
                                     <label for="image">Brand Image</label>
-                                    <input type="file" name="image" class="form-control">
+                                    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
 
                                     @error('image')
                                         <span class="invalid-feedback">{{ $message }}</span>
