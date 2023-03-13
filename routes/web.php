@@ -17,7 +17,7 @@ use App\Http\Controllers\CategoryController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
