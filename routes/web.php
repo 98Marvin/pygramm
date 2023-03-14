@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 
@@ -17,7 +19,8 @@ use App\Http\Controllers\CategoryController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $brands = DB::table('brands')->get();
+    return view('home', compact('brands'));
 });
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
@@ -33,7 +36,12 @@ Route::post('/brands', [BrandController::class, 'store'])->name('brand.store');
 Route::get('/brands/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
 Route::patch('/brands/update/{id}', [BrandController::class, 'update'])->name('brand.update');
 Route::get('/brands/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
- 
+
+Route::get('/home/slider', [HomeController::class, 'index'])->name('home.slider');
+Route::get('/add/slider', [HomeController::class, 'create'])->name('add.slider');
+Route::post('/slider/store', [HomeController::class, 'store'])->name('slider.store');
+
+
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         $users = User::all();

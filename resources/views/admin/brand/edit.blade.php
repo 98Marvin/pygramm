@@ -1,18 +1,5 @@
-<x-app-layout>
-
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{-- {{ __('Dashboard') }} --}}
-            <b>Edit Brand</b>
-
-
-            <b class="float-right">
-                {{-- <span class="badge badge-success">{{ $users->count() }}</span>Users --}}
-            </b>
-        </h2>
-    </x-slot>
-
-
+@extends('admin.master')
+@section('content')
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>{{ session('success') }}!</strong>
@@ -70,5 +57,4 @@
             </div>
         </div>
     </div>
-
-</x-app-layout>
+@endsection
