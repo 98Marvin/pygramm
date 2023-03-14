@@ -40,7 +40,9 @@ Route::get('/brands/delete/{id}', [BrandController::class, 'delete'])->name('bra
 Route::get('/home/slider', [HomeController::class, 'index'])->name('home.slider');
 Route::get('/add/slider', [HomeController::class, 'create'])->name('add.slider');
 Route::post('/slider/store', [HomeController::class, 'store'])->name('slider.store');
-
+Route::get('/slider/edit/{id}', [HomeController::class, 'edit'])->name('slider.edit');
+Route::patch('/slider/update/{id}', [HomeController::class, 'update'])->name('slider.update');
+Route::get('/slider/delete/{id}', [HomeController::class, 'delete'])->name('slider.delete');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {

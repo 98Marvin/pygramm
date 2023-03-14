@@ -50,7 +50,7 @@
                                         <td>
                                             <a href="{{ url('slider/edit/' . $slider->id) }}"
                                                 class="btn btn-sm btn-warning">Edit</a>
-                                            <a href="{{ url('brands/delete/' . $slider->id) }}"
+                                            <a href="{{ url('slider/delete/' . $slider->id) }}"
                                                 onclick="return confirm('Are you sure you want to delete slider...?')"
                                                 class="btn btn-sm btn-danger">Delete</a>
                                         </td>
