@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Slider;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -101,5 +102,10 @@ class HomeController extends Controller
         
         return back()->with('success', 'Slide Deleted Successfully...!!!');
 
+    }
+
+    public function services () {
+        $services = Service::latest()->paginate(9);
+        return view('admin.services.index', compact('services'));
     }
 }

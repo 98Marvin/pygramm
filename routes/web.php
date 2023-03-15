@@ -20,7 +20,8 @@ use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     $brands = DB::table('brands')->get();
-    return view('home', compact('brands'));
+    $services = DB::table('services')->get();
+    return view('home', compact('brands', 'services'));
 });
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
@@ -43,6 +44,8 @@ Route::post('/slider/store', [HomeController::class, 'store'])->name('slider.sto
 Route::get('/slider/edit/{id}', [HomeController::class, 'edit'])->name('slider.edit');
 Route::patch('/slider/update/{id}', [HomeController::class, 'update'])->name('slider.update');
 Route::get('/slider/delete/{id}', [HomeController::class, 'delete'])->name('slider.delete');
+
+Route::get('/home/services', [HomeController::class, 'services'])->name('home.services');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {

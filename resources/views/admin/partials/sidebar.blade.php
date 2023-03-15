@@ -35,8 +35,8 @@
                             </li>
 
                             <li class="active">
-                                <a class="sidenav-item-link" href="index.html">
-                                    <span class="nav-text">About</span>
+                                <a class="sidenav-item-link" href="{{ route('home.services') }}">
+                                    <span class="nav-text">Services</span>
                                 </a>
                             </li>
 
