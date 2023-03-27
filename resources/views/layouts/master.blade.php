@@ -36,8 +36,6 @@
   <!-- ======= Header ======= -->
     @include('layouts.header')
 
-  <!-- ======= Hero Section ======= -->
-    @include('layouts.slider')
 
   <main id="main">
     @yield('content')

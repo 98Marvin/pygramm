@@ -56,7 +56,7 @@ class BrandController extends Controller
 
     public function edit($id)
     {
-        $brand = Brand::find($id);
+        $brand = Brand::findOrFail($id);
 
         return view('admin.brand.edit', compact('brand'));
     }

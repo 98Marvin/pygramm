@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 
 /*
@@ -23,6 +24,9 @@ Route::get('/', function () {
     $services = DB::table('services')->get();
     return view('home', compact('brands', 'services'));
 });
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact/form', [ContactController::class, 'ContactForm'])->name('contact.form');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 Route::post('/categories', [CategoryController::class, 'store'])->name('category.store');
@@ -46,6 +50,14 @@ Route::patch('/slider/update/{id}', [HomeController::class, 'update'])->name('sl
 Route::get('/slider/delete/{id}', [HomeController::class, 'delete'])->name('slider.delete');
 
 Route::get('/home/services', [HomeController::class, 'services'])->name('home.services');
+
+Route::get('admin/contact', [ContactController::class, 'contact'])->name('admin.contact');
+Route::get('add/contact', [ContactController::class, 'add'])->name('add.contact');
+Route::post('store/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::get('contact/edit/{id}', [ContactController::class, 'edit'])->name('contact.edit');
+Route::put('/contact/update/{id}', [ContactController::class, 'update'])->name('contact.update');
+Route::get('/contact/delete/{id}', [ContactController::class, 'delete'])->name('contact.delete');
+Route::get('admin/message', [ContactController::class, 'message'])->name('admin.message');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {

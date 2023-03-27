@@ -2,6 +2,11 @@
 
 
 @section('content')
+
+<!-- ======= Hero Section ======= -->
+@include('layouts.slider')
+
+
     <!-- ======= About Us Section ======= -->
     <section id="about-us" class="about-us">
         <div class="container" data-aos="fade-up">
@@ -49,26 +54,24 @@
                 <p>We offer Quality Services that include the following:</p>
             </div>
 
+
             <div class="row">
-              @foreach ($services as $service)
-                  
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="icon-box iconbox-blue">
-                        <div class="icon">
-                            <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke="none" stroke-width="0" fill="#f5f5f5"
-                                    d="{{ $service->dimension }}">
-                                </path>
-                            </svg>
-                            <i class="{{ $service->icon }}"></i>
+                @foreach ($services as $service)
+                    <div class="col-lg-4 col-md-6 d-flex mb-4 align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in"
+                        data-aos-delay="100">
+                        <div class="icon-box {{ $service->colour }}">
+                            <div class="icon">
+                                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke="none" stroke-width="0" fill="#f5f5f5" d="{{ $service->dimension }}">
+                                    </path>
+                                </svg>
+                                <i class="{{ $service->icon }}"></i>
+                            </div>
+                            <h4><a href="">{{ $service->name }}</a></h4>
+                            <p>{{ $service->description }}</p>
                         </div>
-                        <h4><a href="">{{ $service->name }}</a></h4>
-                        <p>{{ $service->description }}</p>
                     </div>
-                </div>
-
                 @endforeach
-
 
 
             </div>
