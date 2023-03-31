@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Slider;
 use App\Models\Service;
+use App\Models\Portfolio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Intervention\Image\Facades\Image;
 
 class HomeController extends Controller
 {
@@ -104,8 +106,56 @@ class HomeController extends Controller
 
     }
 
+    public function pricing () {
+        return view('pricing');
+    }
+
     public function services () {
         $services = Service::latest()->paginate(9);
         return view('admin.services.index', compact('services'));
     }
+
+    public function portfolio () {
+        $portfolios = Portfolio::all();
+
+        return view('admin.portfolio.index', compact('portfolios'));
+    }
+
+    public function all () {
+        return view('portfolio.index');
+    }
+    
+    public function single () {
+        return view('portfolio.single');
+    }
+
+    public function addPortfolio () {
+        return view('admin.portfolio.create');
+    }
+   
+    public function storePortfolio (Request $request) {
+        $image = $request->file('image');
+
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+
+        Image::make($image)->resize(800, 500)->save('images/portfolios/'.$name_gen);
+
+        $last_img = 'images/portfolios/'.$name_gen;
+
+        Portfolio::insert([
+            'name' => $request->name,
+            'client' => $request->client,
+            'category' => $request->category,
+            'url' => $request->url,
+            'image' => $last_img,
+            'created_at' => Carbon::now()
+            
+        ]);
+
+        return back()->with('success', 'Portfolio Created Successfully...!!!');
+
+        
+    }
+
+
 }

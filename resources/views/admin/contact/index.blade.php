@@ -20,6 +20,7 @@
                                 </button>
                             </div>
                         @endif
+                        
                         <div class="card-header">
                             All Contacts
                         </div>

@@ -4,6 +4,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
@@ -22,11 +23,18 @@ use App\Http\Controllers\CategoryController;
 Route::get('/', function () {
     $brands = DB::table('brands')->get();
     $services = DB::table('services')->get();
-    return view('home', compact('brands', 'services'));
+    $portfolios = DB::table('portfolios')->get();
+
+    return view('home', compact('brands', 'services', 'portfolios'));
 });
+
+Route::get('/portfolio', [HomeController::class, 'all'])->name('portfolio');
+Route::get('/portfolio/{id}', [HomeController::class, 'single'])->name('single');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact/form', [ContactController::class, 'ContactForm'])->name('contact.form');
+Route::get('/pricing', [HomeController::class, 'pricing'])->name('pricing');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 Route::post('/categories', [CategoryController::class, 'store'])->name('category.store');
@@ -50,6 +58,9 @@ Route::patch('/slider/update/{id}', [HomeController::class, 'update'])->name('sl
 Route::get('/slider/delete/{id}', [HomeController::class, 'delete'])->name('slider.delete');
 
 Route::get('/home/services', [HomeController::class, 'services'])->name('home.services');
+Route::get('/home/portfolio', [HomeController::class, 'portfolio'])->name('home.portfolio');
+Route::get('/add/portfolio', [HomeController::class, 'addPortfolio'])->name('add.portfolio');
+Route::post('/portfolio/store', [HomeController::class, 'storePortfolio'])->name('portfolio.store');
 
 Route::get('admin/contact', [ContactController::class, 'contact'])->name('admin.contact');
 Route::get('add/contact', [ContactController::class, 'add'])->name('add.contact');
@@ -58,6 +69,7 @@ Route::get('contact/edit/{id}', [ContactController::class, 'edit'])->name('conta
 Route::put('/contact/update/{id}', [ContactController::class, 'update'])->name('contact.update');
 Route::get('/contact/delete/{id}', [ContactController::class, 'delete'])->name('contact.delete');
 Route::get('admin/message', [ContactController::class, 'message'])->name('admin.message');
+Route::get('message/delete/{id}', [ContactController::class, 'deleteMessage'])->name('message.delete');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
