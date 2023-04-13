@@ -125,8 +125,10 @@ class HomeController extends Controller
         return view('portfolio.index');
     }
     
-    public function single () {
-        return view('portfolio.single');
+    public function single ($id) {
+        $portfolio = Portfolio::findOrFail($id);
+
+        return view('portfolio.single', compact('portfolio'));
     }
 
     public function addPortfolio () {

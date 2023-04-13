@@ -1,8 +1,19 @@
+@php
+    $sliders = DB::table('sliders')->get();
+    $services = DB::table('services')->get();
+    $portfolios = DB::table('portfolios')->get();
+    $clients = DB::table('clients')->get();
+    $messages = DB::table('contact_forms')->get();
+@endphp
+
+
+
+
 <aside class="left-sidebar bg-sidebar">
     <div id="sidebar" class="sidebar sidebar-with-footer">
         <!-- Aplication Brand -->
         <div class="app-brand">
-            <a href="/">
+            <a href="{{ route('dashboard') }}">
                 <svg class="brand-icon" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" width="30"
                     height="33" viewBox="0 0 30 33">
                     <g fill="none" fill-rule="evenodd">
@@ -19,7 +30,7 @@
             <!-- sidebar menu -->
             <ul class="nav sidebar-inner" id="sidebar-menu">
 
-                <li class="has-sub active expand">
+                <li class="has-sub {{ (request()->is('dashboard')) ? 'active' : '' }} expand">
                     <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                         data-target="#dashboard" aria-expanded="false" aria-controls="dashboard">
                         <i class="mdi mdi-view-dashboard-outline"></i>
@@ -30,25 +41,33 @@
 
                             <li class="active">
                                 <a class="sidenav-item-link" href="{{ route('home.slider') }}">
-                                    <span class="nav-text">Slider</span>
+                                    <span class="nav-text">Slider
+                                        <span class="badge badge-success">{{ count($sliders) }}</span>
+                                    </span>
                                 </a>
                             </li>
 
                             <li class="active">
                                 <a class="sidenav-item-link" href="{{ route('home.services') }}">
-                                    <span class="nav-text">Services</span>
+                                    <span class="nav-text">Services
+                                        <span class="badge badge-primary">{{ count($services) }}</span>
+                                    </span>
                                 </a>
                             </li>
 
                             <li class="active">
                                 <a class="sidenav-item-link" href="{{ route('home.portfolio') }}">
-                                    <span class="nav-text">Portfolio</span>
+                                    <span class="nav-text">Portfolio
+                                        <span class="badge badge-danger">{{ count($portfolios) }}</span>
+                                    </span>
                                 </a>
                             </li>
 
                             <li class="active">
-                                <a class="sidenav-item-link" href="{{ route('brands') }}">
-                                    <span class="nav-text">Brands</span>
+                                <a class="sidenav-item-link" href="{{ route('clients') }}">
+                                    <span class="nav-text">Clients
+                                        <span class="badge badge-warning">{{ count($clients) }}</span>
+                                    </span>
                                 </a>
                             </li>
 
@@ -56,11 +75,7 @@
                     </ul>
                 </li>
 
-
-
-
-
-                <li class="has-sub">
+                <li class="has-sub {{ (request()->is('admin/contact')) ? 'active' : '' }}">
                     <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                         data-target="#ui-elements" aria-expanded="false" aria-controls="ui-elements">
                         <i class="mdi mdi-folder-multiple-outline"></i>
@@ -79,7 +94,7 @@
                             <li class="has-sub">
                                 <a class="sidenav-item-link" href="{{ route('admin.message') }}">
                                     <span class="nav-text">Contact Message
-                                        {{-- <span class="badge badge-warning">{{ count($messages) }}</span> --}}
+                                        <span class="badge badge-secondary">{{ count($messages) }}</span>
                                     </span>
                                 </a>
                             </li>
@@ -88,40 +103,7 @@
                     </ul>
                 </li>
 
-
-
-
-
-                <li class="has-sub">
-                    <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#charts"
-                        aria-expanded="false" aria-controls="charts">
-                        <i class="mdi mdi-chart-pie"></i>
-                        <span class="nav-text">Charts</span> <b class="caret"></b>
-                    </a>
-                    <ul class="collapse" id="charts" data-parent="#sidebar-menu">
-                        <div class="sub-menu">
-
-
-
-                            <li>
-                                <a class="sidenav-item-link" href="chartjs.html">
-                                    <span class="nav-text">ChartJS</span>
-
-                                </a>
-                            </li>
-
-
-
-
-                        </div>
-                    </ul>
-                </li>
-
-
-
-
-
-                <li class="has-sub">
+                <li class="has-sub {{ (request()->is('ad')) ? 'active' : '' }}">
                     <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#pages"
                         aria-expanded="false" aria-controls="pages">
                         <i class="mdi mdi-image-filter-none"></i>
@@ -130,18 +112,12 @@
                     <ul class="collapse" id="pages" data-parent="#sidebar-menu">
                         <div class="sub-menu">
 
-
-
                             <li>
                                 <a class="sidenav-item-link" href="user-profile.html">
                                     <span class="nav-text">User Profile</span>
 
                                 </a>
                             </li>
-
-
-
-
 
                             <li class="has-sub">
                                 <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
@@ -164,9 +140,6 @@
                                 </ul>
                             </li>
 
-
-
-
                             <li class="has-sub">
                                 <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                     data-target="#others" aria-expanded="false" aria-controls="others">
@@ -187,15 +160,9 @@
                                 </ul>
                             </li>
 
-
-
                         </div>
                     </ul>
                 </li>
-
-
-
-
 
                 <li class="has-sub">
                     <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"

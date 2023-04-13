@@ -39,10 +39,10 @@
                                         <td style="width: 30%;">{{ $service->description }}</td>
                                         <td style="width: 20%;">
                                             <a href="{{ url('services/edit/' . $service->id) }}"
-                                                class="btn btn-sm btn-warning">Edit</a>
+                                                class="btn btn-sm btn-warning"><i class="mdi mdi-lead-pencil"></i></a>
                                             <a href="{{ url('services/delete/' . $service->id) }}"
                                                 onclick="return confirm('Are you sure you want to delete service...?')"
-                                                class="btn btn-sm btn-danger">Delete</a>
+                                                class="btn btn-sm btn-danger"><i class="mdi mdi-trash-can-outline"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

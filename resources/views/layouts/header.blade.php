@@ -28,17 +28,16 @@
                 <li class="{{ (request()->is('services')) ? 'active' : '' }}"><a href="#">Services</a></li>
                 <li class="{{ (request()->is('portfolio')) ? 'active' : '' }}"><a href="{{ route('portfolio') }}">Portfolio</a></li>
                 <li class="{{ (request()->is('pricing')) ? 'active' : '' }}"><a href="{{ route('pricing') }}">Pricing</a></li>
-                <li class="{{ (request()->is('blog')) ? 'active' : '' }}"><a href="blog.html">Blog</a></li>
+                <li><a href="https://blog.pygrammtech.co.ke">Blog</a></li>
                 <li class="{{ (request()->is('contact')) ? 'active' : '' }}"><a href="{{ route('contact') }}">Contact</a></li>
 
             </ul>
         </nav><!-- .nav-menu -->
 
         <div class="header-social-links">
-            <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
-            <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
-            <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="icofont-linkedin"></i></i></a>
+            <a target="_blank" href="https://www.facebook.com/Pygramm/" class="facebook"><i class="icofont-facebook"></i></a>
+            <a target="_blank" href="https://www.instagram.com/Pygramm/" class="instagram"><i class="icofont-instagram"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/company/pygramm-technologies/" class="linkedin"><i class="icofont-linkedin"></i></i></a>
         </div>
 
     </div>

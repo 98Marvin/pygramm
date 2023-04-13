@@ -17,7 +17,7 @@
             <div class="row content">
                 <div class="col-lg-6" data-aos="fade-right">
                     <h2>Search Engine Optimization</h2>
-                    <h3>Through use of social media platforms we help you connect with your audience and build your brand,
+                    <h3>Through use of social media platforms we help you connect with your audience and build your client,
                         increase sales, increase your website traffic and build a community of followers to share and engage
                         with content.
                     </h3>
@@ -105,7 +105,7 @@
                             <p>{{ $portfolio->category }}</p>
                             <a href="/{{ $portfolio->image }}" data-gall="portfolioGallery" class="venobox preview-link"
                                 title="Web 3"><i class="bx bx-plus"></i></a>
-                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
+                            <a href="{{ route('single', $portfolio->id) }}" class="details-link" title="More Details"><i
                                     class="bx bx-link"></i></a>
                         </div>
                     </div>
@@ -121,15 +121,15 @@
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>Brands</h2>
+                <h2>Clients</h2>
             </div>
 
             <div class="row no-gutters clients-wrap clearfix" data-aos="fade-up">
 
-                @foreach ($brands as $brand)
+                @foreach ($clients as $client)
                     <div class="col-lg-3 col-md-4 col-6">
                         <div class="client-logo">
-                            <img src="{{ $brand->image }}" class="img-fluid" alt="">
+                            <img src="{{ $client->image }}" class="img-fluid" alt="">
                         </div>
                     </div>
                 @endforeach

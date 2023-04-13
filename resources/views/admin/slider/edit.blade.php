@@ -15,13 +15,13 @@
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input type="text" name="title" class="form-control" id="title"
-                                value="{{ $slide->title }}">
+                                value="{{ old('title', $slide->title) }}">
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
                             <textarea class="form-control" id="description" rows="3" name="description">{{ $slide->description }}</textarea>
                         </div>
-                        <input type="hidden" name="old_image" value="{{ $slide->image }}" id="">
+                        <input type="hidden" name="old_image" value="{{ old('image', $slide->image) }}" id="">
 
                         <div class="form-group">
                             <label for="image">Image</label>

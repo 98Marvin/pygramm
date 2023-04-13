@@ -2,10 +2,11 @@
 
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ChangePass;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 
@@ -21,11 +22,11 @@ use App\Http\Controllers\CategoryController;
 */
 
 Route::get('/', function () {
-    $brands = DB::table('brands')->get();
+    $clients = DB::table('clients')->get();
     $services = DB::table('services')->get();
     $portfolios = DB::table('portfolios')->get();
 
-    return view('home', compact('brands', 'services', 'portfolios'));
+    return view('home', compact('clients', 'services', 'portfolios'));
 });
 
 Route::get('/portfolio', [HomeController::class, 'all'])->name('portfolio');
@@ -44,11 +45,11 @@ Route::get('/categories/softdelete/{id}', [CategoryController::class, 'softDelet
 Route::get('/categories/restore/{id}', [CategoryController::class, 'restore'])->name('category.restore');
 Route::get('/categories/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
 
-Route::get('/brands', [BrandController::class, 'index'])->name('brands');
-Route::post('/brands', [BrandController::class, 'store'])->name('brand.store');
-Route::get('/brands/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
-Route::patch('/brands/update/{id}', [BrandController::class, 'update'])->name('brand.update');
-Route::get('/brands/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
+Route::get('/clients', [ClientController::class, 'index'])->name('clients');
+Route::post('/clients', [ClientController::class, 'store'])->name('client.store');
+Route::get('/clients/edit/{id}', [ClientController::class, 'edit'])->name('client.edit');
+Route::patch('/clients/update/{id}', [ClientController::class, 'update'])->name('client.update');
+Route::get('/clients/delete/{id}', [ClientController::class, 'delete'])->name('client.delete');
 
 Route::get('/home/slider', [HomeController::class, 'index'])->name('home.slider');
 Route::get('/add/slider', [HomeController::class, 'create'])->name('add.slider');
@@ -77,3 +78,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         return view('admin.index', compact('users'));
     })->name('dashboard');
 });
+
+Route::get('/user/password', [ChangePass::class, 'index'])->name('change.password');
+Route::post('/password/update', [ChangePass::class, 'updatePassword'])->name('update.password');
+Route::get('/user/profile', [ChangePass::class, 'profile'])->name('profile.update');
+Route::post('/user/profile/update', [ChangePass::class, 'updateProfile'])->name('update.profile');
